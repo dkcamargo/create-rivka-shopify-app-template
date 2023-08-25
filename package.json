@@ -1,10 +1,13 @@
 {
   "name": "create-rivka-shopify-app-template",
   "version": "1.0.1",
-  "description": "",
+  "description": "Creates a new rivka shopify app template for you",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js my-test-app",
+    "dev": "node index.js",
+    "build": "pkg ./index.js -o ./bin/create-rivka-shopify-app-template",
+    "test-build": "cd ./bin && create-rivka-shopify-app-template my-build-test-app"
   },
   "author": "",
   "license": "MIT",
