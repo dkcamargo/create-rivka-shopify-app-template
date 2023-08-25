@@ -1,6 +1,6 @@
 {
   "name": "create-rivka-shopify-app-template",
-  "version": "1.0.1",
+  "version": "1.0.15",
   "description": "Creates a new rivka shopify app template for you",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
     "build": "pkg ./index.js -o ./bin/create-rivka-shopify-app-template",
     "test-build": "cd ./bin && create-rivka-shopify-app-template my-build-test-app"
   },
+  "bin": "node index.js",
   "author": "",
   "license": "MIT",
   "dependencies": {

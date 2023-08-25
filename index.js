@@ -1,45 +1,39 @@
+#!/usr/bin/node
+
+
+
 const spawn = require('cross-spawn');
-const fs = require('fs');
 const path = require('path');
-const { $ } = import('execa');
+
+function isUsingYarn() {
+    return (process.env.npm_config_user_agent || '').indexOf('yarn') === 0;
+}
+
 
 
 const projectName = process.argv[2];
-const currentDir = process.cwd();
-const projectDir = path.resolve(currentDir, projectName);
+
+const root = path.resolve(projectName);
 
 
-const duplicateTempalte = async () => {
-    fs.mkdirSync(projectDir, { recursive: true });
-    
-    const templateDir = path.resolve(__dirname, 'template');
-    fs.cpSync(templateDir, projectDir, { recursive: true });
-    
-    fs.renameSync(
-        path.join(projectDir, 'gitignore'),
-        path.join(projectDir, '.gitignore')
-    );
-    const projectPackageJson = require(path.join(projectDir, 'package.json'));
-    
-    projectPackageJson.name = projectName;
-    
-    fs.writeFileSync(
-        path.join(projectDir, 'package.json'),
-        JSON.stringify(projectPackageJson, null, 2)
-    );
-}
 
 
 (async () => {
     console.log(`
-        Begining to Create Shopify App Template for  ${projectName} 
+        Begining to Create Shopify App Template for  ${projectName} on: ${root}
         
         Go get a coffee it might take a few minutes!
     `);
 
-    await duplicateTempalte();
-    // npm start --prefix path/to/your/app
-    spawn.sync('npm', [`install`, '--prefix', projectDir.toString()], { stdio: 'inherit' });
+
+    spawn.sync('cd', [`clone`, 'https://github.com/dkcamargo/rivka-shopify-app-template.git', root], { stdio: 'inherit' });
+    spawn.sync('git', [`clone`, 'https://github.com/dkcamargo/rivka-shopify-app-template.git'], { stdio: 'inherit' });
+    spawn.sync('ren', [`rivka-shopify-app-template`, projectName ], { stdio: 'inherit' });
+    if(isUsingYarn()) {
+        spawn.sync('yarn', ['--cwd', root], { stdio: 'inherit' });
+    } else {
+        spawn.sync('npm', [`install`, '--prefix', root], { stdio: 'inherit' });
+    }
 
     console.clear();
 
