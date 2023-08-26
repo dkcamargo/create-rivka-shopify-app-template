@@ -17,83 +17,71 @@ function init() {
 
 
     spawn.sync('git', [`clone`, 'https://github.com/dkcamargo/rivka-shopify-app-template.git', root], { stdio: 'inherit' });
-    spawn.sync('dir', { stdio: 'inherit' });
-    spawn.sync('cd', [root], { stdio: 'inherit' });
-
-    //create node_modules before npm install?
-    let everythingAlright;
-    try {
-        if(isUsingYarn()) {
-            spawn.sync('yarn', ['--cwd', root.toString()], { stdio: 'inherit' });
-        } else {
-            spawn.sync('npm', [`install`, '--prefix', root.toString()], { stdio: 'inherit' });
-        }
-
-        everythingAlright = true;
-    } catch(e) {
-        console.error('Some error happened when trying to install the node_modules')
-        everythingAlright = false;
+    spawn.sync('git', [`remote`, 'remove', 'origin'], { stdio: 'inherit', cwd: root });
+    if(isUsingYarn) {
+        spawn.sync('yarn', [], { stdio: 'inherit', cwd: root });
+    } else {
+        spawn.sync('npm', ['install'], { stdio: 'inherit', cwd: root });
     }
-    if(everythingAlright) {
-        console.log(`
-            ${projectName}
-            │   .gitignore
-            │   LICENSE.md
+    
+    
+    console.log(`
+        ${projectName}
+        │   .gitignore
+        │   LICENSE.md
+        │   package.json
+        │   README.md
+        │
+        └───web
+            │   gdpr.js
+            │   index.js
             │   package.json
-            │   README.md
+            │   shopify.js
+            │   shopify.web.toml
             │
-            └───web
-                │   gdpr.js
-                │   index.js
+            └───frontend
+                │   App.jsx
+                │   dev_embed.js
+                │   .gitignore
+                │   index.html
+                │   index.jsx
+                │   LICENSE.md
                 │   package.json
-                │   shopify.js
+                │   Routes.jsx
                 │   shopify.web.toml
+                │   vite.config.js
                 │
-                └───frontend
-                    │   App.jsx
-                    │   dev_embed.js
-                    │   .gitignore
-                    │   index.html
-                    │   index.jsx
-                    │   LICENSE.md
-                    │   package.json
-                    │   Routes.jsx
-                    │   shopify.web.toml
-                    │   vite.config.js
-                    │
-                    ├───assets
-                    │       empty-state.svg
-                    │       home-trophy.png
-                    │       index.js
-                    │
-                    ├───hooks
-                    │       index.js
-                    │       useAppQuery.js
-                    │       useAuthenticatedFetch.js
-                    │
-                    ├───pages
-                    │       ExamplePage1.jsx
-                    │       ExamplePage2.jsx
-                    │       ExitIframe.jsx
-                    │       HomePage.jsx
-                    │       index.jsx
-                    │       NotFound.jsx
-                    │
-                    └───providers
-                            AppBridgeProvider.jsx
-                            index.js
-                            PolarisProvider.jsx
-                            QueryProvider.jsx
+                ├───assets
+                │       empty-state.svg
+                │       home-trophy.png
+                │       index.js
+                │
+                ├───hooks
+                │       index.js
+                │       useAppQuery.js
+                │       useAuthenticatedFetch.js
+                │
+                ├───pages
+                │       ExamplePage1.jsx
+                │       ExamplePage2.jsx
+                │       ExitIframe.jsx
+                │       HomePage.jsx
+                │       index.jsx
+                │       NotFound.jsx
+                │
+                └───providers
+                        AppBridgeProvider.jsx
+                        index.js
+                        PolarisProvider.jsx
+                        QueryProvider.jsx
 
-            Done Creating ${projectName} Shopify App Template
-            
-            cd ./${projectName}
-            npm run dev
+        Done Creating ${projectName} Shopify App Template
+        
+        cd ./${projectName}
+        npm run dev
 
-            Happy Hacking!
-        `);
-    }
-
+        Happy Hacking!
+    `);
 }
 
 
