@@ -78,7 +78,7 @@ function init() {
         Done Creating ${projectName} Shopify App Template
         
         cd ./${projectName}
-        npm run dev
+        ${isUsingYarn()?'yarn dev':'npm run dev'}
 
         Happy Hacking!
     `);
