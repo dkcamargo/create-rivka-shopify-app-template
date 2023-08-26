@@ -1,6 +1,6 @@
 {
   "name": "create-rivka-shopify-app-template",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "description": "Creates a new rivka shopify app template for you",
   "main": "index.js",
   "scripts": {
