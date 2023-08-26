@@ -57,9 +57,9 @@ Welcome to the **Project Name Shopify App Template** repository! This template s
 
 ## Getting Started
 
-1. ```npx create-rivka-shopify-app-template <your-project-name>```
+1. ```npm init rivka-shopify-app-template <your-project-name>``` or ```yarn create rivka-shopify-app-template <your-project-name>```
 2. Navigate to the project directory: `cd <your-project-name>`
-3. Run the development server: `npm run dev`
+3. Run the development server: `npm run dev` or `yarn dev`
 
 The template is organized with backend code under the `web` directory and frontend code under `web/frontend`.
 
