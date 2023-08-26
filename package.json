@@ -1,19 +1,21 @@
 {
   "name": "create-rivka-shopify-app-template",
-  "version": "1.0.15",
+  "version": "1.0.26",
   "description": "Creates a new rivka shopify app template for you",
   "main": "index.js",
   "scripts": {
     "test": "node index.js my-test-app",
     "dev": "node index.js",
     "build": "pkg ./index.js -o ./bin/create-rivka-shopify-app-template",
-    "test-build": "cd ./bin && create-rivka-shopify-app-template my-build-test-app"
+    "test-build": "cd ./bin && create-rivka-shopify-app-template my-build-test-app",
+    "start": "node index.js"
   },
-  "bin": "node index.js",
+  "bin": {
+    "create-rivka-shopify-app-template": "./index.js"
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "cross-spawn": "^7.0.3",
-    "execa": "^8.0.1"
+    "cross-spawn": "^7.0.3"
   }
 }
